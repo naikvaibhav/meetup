@@ -31,7 +31,7 @@
     "date-fns": "^2.11.1",
     "flatpickr": "^4.6.3",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ngx-spinner": "^9.0.2",
     "ngx-toastr": "^10.0.4",
     "rrule": "^2.6.4",
