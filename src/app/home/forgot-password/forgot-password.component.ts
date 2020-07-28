@@ -6,7 +6,7 @@ import { ToastrService } from "ngx-toastr";
 @Component({
   selector: "app-forgot-password",
   templateUrl: "./forgot-password.component.html",
-  styleUrls: ["./forgot-password.component.css"]
+  styleUrls: ["./forgot-password.component.css"],
 })
 export class ForgotPasswordComponent implements OnInit {
   public email: string;
@@ -33,19 +33,21 @@ export class ForgotPasswordComponent implements OnInit {
   public forgotPasswordFunction() {
     this.checkFormValidation();
     let data = {
-      email: this.email
+      email: this.email,
     };
     // console.log("data", data);
     this.appService.forgotPasswordFunction(data).subscribe(
-      apiResponse => {
+      (apiResponse) => {
         console.log(apiResponse);
         if (apiResponse.status == 200) {
           this.toastr.success(apiResponse.message);
+          this.router.navigate(["/"]);
         } else {
           this.toastr.error(apiResponse.message);
+          this.router.navigate(["/"]);
         }
       },
-      err => {
+      (err) => {
         this.toastr.error("Some error occured");
       }
     );

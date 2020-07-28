@@ -16,7 +16,7 @@ import { tap, map, filter } from "rxjs/operators";
 })
 export class AppService {
   // private url = "http://localhost:3000/api/v1";
-  private url = "http://apimeetup.angularweb.tech/api/v1";
+  private url = "https://apimeetup.naikvaibhav.online/api/v1";
 
   public showSpinner: boolean = false;
 
@@ -89,10 +89,12 @@ export class AppService {
   public getSingleUser(userId): Observable<any> {
     const headers = new HttpHeaders().set("authToken", this.getAuthToken());
     // console.log(userId);
-    return this._http.get(`${this.url}/users/${userId}`, { headers: headers }).pipe(
-      tap(data => {}),
-      catchError(this.handleError)
-    );
+    return this._http
+      .get(`${this.url}/users/${userId}`, { headers: headers })
+      .pipe(
+        tap((data) => {}),
+        catchError(this.handleError)
+      );
   }
 
   public setUserInfoInLocalStorage = (data): any => {
@@ -146,22 +148,26 @@ export class AppService {
 
   public getAllMeetings(userId): Observable<any> {
     const headers = new HttpHeaders().set("authToken", this.getAuthToken());
-    return this._http.get(`${this.url}/meetings/user/${userId}`, {
-      headers: headers,
-    }).pipe(
-      tap(data => {}),
-      catchError(this.handleError)
-    );
+    return this._http
+      .get(`${this.url}/meetings/user/${userId}`, {
+        headers: headers,
+      })
+      .pipe(
+        tap((data) => {}),
+        catchError(this.handleError)
+      );
   }
 
   public getAMeetingDetail(meetid): Observable<any> {
     const headers = new HttpHeaders().set("authToken", this.getAuthToken());
-    return this._http.get(`${this.url}/meetings/meeting/${meetid}`, {
-      headers: headers,
-    }).pipe(
-      tap(data => {}),
-      catchError(this.handleError)
-    );
+    return this._http
+      .get(`${this.url}/meetings/meeting/${meetid}`, {
+        headers: headers,
+      })
+      .pipe(
+        tap((data) => {}),
+        catchError(this.handleError)
+      );
   }
 
   public deleteMeeting(userid, meetid): Observable<any> {

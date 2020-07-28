@@ -9,11 +9,11 @@ import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
-  HttpParams
+  HttpParams,
 } from "@angular/common/http";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class SocketService {
   private socket;
@@ -23,14 +23,14 @@ export class SocketService {
     //connection is being created
     //that handshake
     // this.socket = io("http://localhost:3000");
-    this.socket = io("http://apimeetup.angularweb.tech")
+    this.socket = io("https://apimeetup.naikvaibhav.online");
     this.authToken = JSON.parse(localStorage.getItem("authToken"));
   }
 
   public verifyUser = () => {
     console.log("verifyUser called");
-    return Observable.create(observer => {
-      this.socket.on("verifyUser", data => {
+    return Observable.create((observer) => {
+      this.socket.on("verifyUser", (data) => {
         console.log("verifyUser is catched", data);
         observer.next(data);
       });
@@ -38,7 +38,7 @@ export class SocketService {
   };
 
   //events to be emitted
-  public setUser = token => {
+  public setUser = (token) => {
     // const token = JSON.parse(localStorage.getItem("authToken"));
     console.log("setUser");
     console.log("set-user is emitted");
@@ -46,8 +46,8 @@ export class SocketService {
   }; //end setUser
 
   public onlineUsersList = () => {
-    return Observable.create(observer => {
-      this.socket.on("online-user-list", userList => {
+    return Observable.create((observer) => {
+      this.socket.on("online-user-list", (userList) => {
         // console.log("online-user-list catched");
         // console.log("userlist", userList);
         observer.next(userList);
@@ -59,25 +59,25 @@ export class SocketService {
     this.socket.disconnect();
   };
 
-  public informServer = data => {
+  public informServer = (data) => {
     // console.log("informServer is emitted");
     this.socket.emit("inform-server", data);
   };
 
-  public informUser = userId => {
+  public informUser = (userId) => {
     // console.log("MyIO emit is being catched", userId);
-    return Observable.create(observer => {
-      this.socket.on(userId, data => {
+    return Observable.create((observer) => {
+      this.socket.on(userId, (data) => {
         observer.next(data);
       }); //end Socket
     }); //end Observable
   };
 
-  public meetingNotification = userId => {
+  public meetingNotification = (userId) => {
     // console.log("MyIO emit is being catched", userId);
     // this.socket.removeAllListeners(userId);
-    return Observable.create(observer => {
-      this.socket.on(userId, data => {
+    return Observable.create((observer) => {
+      this.socket.on(userId, (data) => {
         observer.next(data);
       }); //end Socket
     }); //end Observable
@@ -85,7 +85,7 @@ export class SocketService {
 
   public disconnectedSocket = () => {
     console.log("disconnected socket called");
-    return Observable.create(observer => {
+    return Observable.create((observer) => {
       this.socket.emit("disconnect", () => {
         // console.log("disconnected is catched");
         // console.log("disconnect called");

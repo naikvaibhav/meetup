@@ -7,7 +7,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: "app-reset-password",
   templateUrl: "./reset-password.component.html",
-  styleUrls: ["./reset-password.component.css"]
+  styleUrls: ["./reset-password.component.css"],
 })
 export class ResetPasswordComponent implements OnInit {
   public isLink: boolean = false;
@@ -30,7 +30,7 @@ export class ResetPasswordComponent implements OnInit {
     // console.log("id", id);
     // console.log("token", token);
     this.appService.verifyPasswordResetLink(id, token).subscribe(
-      apiResponse => {
+      (apiResponse) => {
         this.isLink = true;
         // console.log(apiResponse);
         // console.log(apiResponse.data.token);
@@ -38,7 +38,7 @@ export class ResetPasswordComponent implements OnInit {
         this.token = apiResponse.data.token;
         this.userId = apiResponse.data.userId;
       },
-      err => {
+      (err) => {
         console.log(err);
         console.log("Link expired");
         this.toastr.error("Link expired");
@@ -50,15 +50,18 @@ export class ResetPasswordComponent implements OnInit {
     let data = {
       userId: this.userId,
       token: this.token,
-      password: this.password
+      password: this.password,
     };
     this.appService.updatePassword(data).subscribe(
-      apiResponse => {
+      (apiResponse) => {
         console.log("Data posted");
         console.log(apiResponse);
+        this.toastr.success(apiResponse.message);
+        this.router.navigate(["/"]);
       },
-      err => {
+      (err) => {
         console.log(err);
+        this.router.navigate(["/"]);
       }
     );
   };

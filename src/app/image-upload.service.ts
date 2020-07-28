@@ -3,14 +3,14 @@ import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
-  HttpParams
+  HttpParams,
 } from "@angular/common/http";
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ImageUploadService {
   // private url = "http://localhost:3000/api/v1";
-  private url = "http://apimeetup.angularweb.tech/api/v1";
+  private url = "https://apimeetup.naikvaibhav.online/api/v1";
 
   constructor(private _http: HttpClient) {}
 
